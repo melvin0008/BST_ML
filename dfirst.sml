@@ -15,7 +15,7 @@ fun insert(i, leaf) =  node(i,leaf,leaf)
    val t5 = insert(125, t4);
    val t6 = insert(175, t5);
    val t7 = insert(250, t6);
-   val t8 = insert(250, t7);
+   val t8 = insert(25, t7);
    val root = insert(75, t8)
    in root
    end;
@@ -30,7 +30,12 @@ fun dfirst2(tree) =
  | head::mytree => 
        case head of
        leaf => acc
- |     node(value,left,right) => depth(right::mytree,value::acc ) 
+ |     node(value,left,right) =>
+       let val a = depth(left::mytree, acc);
+           val b = depth(right::mytree,acc)
+       in
+         a@(value::b)
+       end 
  in
  depth([tree],[])
  end
